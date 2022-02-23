@@ -13,8 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
+from ..authentication.admin import sales_admin
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
+
+# import sys
+#
+# sys.path.append("..authentication")
+
 
 ## This changes the header of the admin page
 
@@ -22,5 +30,7 @@ admin.site.site_header = 'Leads Management Platform'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('authentication.urls'))
+
+    path('', include('authentication.urls'))
+    # path('salesadmin/', sales_admin.urls)
 ]

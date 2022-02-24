@@ -14,14 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-
-from ..authentication.admin import sales_admin
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+# from ..authentication.admin import sales_admin
 
-# import sys
-#
-# sys.path.append("..authentication")
+value = settings.BASE_DIR
+
+
+import sys
+
+## In order to import a file from another directory we have to use the sys.path.insert method
+## Refer to the below link to get a better understanding
+## https://www.codegrepper.com/code-examples/python/django+import+file+from+another+directory
+
+sys.path.insert(1,'/authentication')
+import authentication.admin
 
 
 ## This changes the header of the admin page
@@ -31,6 +39,8 @@ admin.site.site_header = 'Leads Management Platform'
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', include('authentication.urls'))
-    # path('salesadmin/', sales_admin.urls)
+    path('', include('authentication.urls')),
+    path('salesadmin/', authentication.admin.sales_admin.urls)
 ]
+
+

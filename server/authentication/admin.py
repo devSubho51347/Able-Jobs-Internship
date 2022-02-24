@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Lead
+from .models import User, Lead, Remark
 
 # for import/export integration
 from import_export import resources
@@ -56,5 +56,5 @@ sales_admin.register(Lead, LeadImportAdmin)
 # sales_admin.register(Lead)
 
 admin.site.register(User)
-
+admin.site.register(Remark)
 admin.site.register(Lead, LeadImportAdmin)

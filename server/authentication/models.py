@@ -57,7 +57,21 @@ class Lead(models.Model):
     email = models.EmailField(max_length=200, null=True, blank=True)
     phone_no = models.IntegerField(unique=True, null=True, blank=True)
     state = models.CharField(default=not_assigned, choices=state, max_length=100)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE,null = False, blank = False)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+
+class Remark(models.Model):
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    remark = models.CharField(max_length=200, null=True, blank=True)
+    lead_id = models.ForeignKey(Lead, on_delete=models.CASCADE, null=False, blank=False)
+    user_id = models.ForeignKey(User, on_delete=models.DO_NOTHING, null= False, blank= False)
+
+    def __str__(self):
+        return "Remark for Lead " +" "+ str(self.lead_id)
+
+
+
+
